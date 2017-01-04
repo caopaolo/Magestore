@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+        xmlns:xsi="http://symfony.com/schema/dic/services">
+    <type name="Magestore\Multivendor\Model\ResourceModel\Vendor\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">multivendor_vendor</argument>
+            <argument name="resourceModel" xsi:type="string">Magestore\Multivendor\Model\ResourceModel\Vendor</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="multivendor_vendor_listing_data_source" xsi:type="string">Magestore\Multivendor\Model\ResourceModel\Vendor\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
+<container name="listing_top">
+<argument name="data" xsi:type="array">
+    <item name="config" xsi:type="array">
+        <item name="template" xsi:type="string">ui/grid/toolbar</item>
+        <item name="stickyTmpl" xsi:type="string">ui/grid/sticky/toolbar</item>
+    </item>
+</argument>
+</container>
+<container name="sticky">
+<argument name="data" xsi:type="array">
+    <item name="config" xsi:type="array">
+        <item name="component" xsi:type="string">Magento_Ui/js/grid/sticky/sticky</item>
+        <item name="toolbarProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.listing_top</item>
+        <item name="listingProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.multivendor_vendor_columns</item>
+    </item>
+</argument>
+</container>
