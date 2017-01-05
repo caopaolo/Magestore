@@ -11,7 +11,7 @@ class InstallSchema implements InstallSchemaInterface
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context) {
 	
     $setup->startSetup();
-
+    /** multivendor table **/
     if($setup->getConnection()->isTableExists('multivendor_vendor')!=true){
             $table=$setup->getConnection()->newTable('multivendor_vendor')
                 ->addColumn(
@@ -104,6 +104,7 @@ class InstallSchema implements InstallSchemaInterface
 //                ->setOption('charset','utf8');
             $setup->getConnection()->createTable($table);
         }
+    /** multivendor_vendor_product**/
     if($setup->getConnection()->isTableExists('multivendor_vendor_product')!=true){
             $table=$setup->getConnection()->newTable('multivendor_vendor_product')
                 ->addColumn(
