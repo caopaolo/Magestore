@@ -5,3 +5,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magestore_Multivendor::Adminhtml" title="Multivendor" module="Magestore_Multivendor" sortOrder="30" resource="Magestore_Multivendor::Adminhtml"/>
+        <add id="Magestore_Multivendor::vendor" title="Vendor" module="Magestore_Multivendor" sortOrder="10" parent="Magestore_Multivendor::Adminhtml" action="vendor/index/" resource="Magento_Multivendor::vendor"/>
+        <add id="Magestore_Multivendor::customer_online" title="Now Online" module="Magento_Customer" sortOrder="30" parent="Magestore_Multivendor::Adminhtml" action="customer/online/" resource="Magento_Customer::online"/>
+        <add id="Magestore_Multivendor::customer_group" title="Customer Groups" module="Magento_Customer" sortOrder="50" parent="Magestore_Multivendor::Adminhtml" action="customer/group" resource="Magento_Customer::group"/>
+    </menu>
+</config>

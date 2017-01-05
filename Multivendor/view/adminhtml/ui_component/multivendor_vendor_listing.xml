@@ -1,4 +1,4 @@
-<container name="listing_top">
+<container name="listing_top" xmlns:xsi="http://symfony.com/schema/dic/services">
     <argument name="data" xsi:type="array">
         <item name="config" xsi:type="array">
             <item name="template" xsi:type="string">ui/grid/toolbar</item>
@@ -8,7 +8,6 @@
 </container>
 <columns name="multivendor_vendor_columns">
 <argument name="data" xsi:type="array">
-
 </argument>
 <column name="description">
     <argument name="data" xsi:type="array">
@@ -21,7 +20,6 @@
     </argument>
 </column>
 </columns>
-
 <container name="sticky">
 <argument name="data" xsi:type="array">
     <item name="config" xsi:type="array">
