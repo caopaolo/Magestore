@@ -1,3 +1,22 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+<dataSource name="multivendor_vendor_listing_data_source" xmlns:xsi="http://symfony.com/schema/dic/services">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">multivendor_vendor_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">vendor_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+</dataSource>
 <container name="listing_top" xmlns:xsi="http://symfony.com/schema/dic/services">
     <argument name="data" xsi:type="array">
         <item name="config" xsi:type="array">
@@ -5,27 +24,43 @@
             <item name="stickyTmpl" xsi:type="string">ui/grid/sticky/toolbar</item>
         </item>
     </argument>
+    <bookmark name="bookmarks">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="storageConfig" xsi:type="array">
+                    <item name="namespace" xsi:type="string">multivendor_vendor_listing</item>
+                </item>
+            </item>
+        </argument>
+    </bookmark>
 </container>
 <columns name="multivendor_vendor_columns">
-<argument name="data" xsi:type="array">
-</argument>
-<column name="description">
     <argument name="data" xsi:type="array">
         <item name="config" xsi:type="array">
-            <item name="filter" xsi:type="string">textRange</item>
-            <item name="sorting" xsi:type="string">asc</item>
-            <item name="label" xsi:type="string" translate="true">Description</item>
-            <item name="sortOrder" xsi:type="number">30</item>
+            <item name="storageConfig" xsi:type="array">
+                <item name="provider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.listing_top.bookmarks</item>
+                <item name="namespace" xsi:type="string">current</item>
+            </item>
         </item>
     </argument>
-</column>
+    <column name="description">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="filter" xsi:type="string">textRange</item>
+                <item name="sorting" xsi:type="string">asc</item>
+                <item name="label" xsi:type="string" translate="true">Description</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+    </column>
 </columns>
 <container name="sticky">
-<argument name="data" xsi:type="array">
-    <item name="config" xsi:type="array">
-        <item name="component" xsi:type="string">Magento_Ui/js/grid/sticky/sticky</item>
-        <item name="toolbarProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.listing_top</item>
-        <item name="listingProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.multivendor_vendor_columns</item>
-    </item>
-</argument>
-</container>
+    <argument name="data" xsi:type="array">
+        <item name="config" xsi:type="array">
+            <item name="component" xsi:type="string">Magento_Ui/js/grid/sticky/sticky</item>
+            <item name="toolbarProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.listing_top</item>
+            <item name="listingProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.multivendor_vendor_columns</item>
+        </item>
+    </argument>
+    </container>
+    </listing>
