@@ -10,7 +10,6 @@ class Index extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
         $this->resultPageFactory = $resultPageFactory;
     }
     public function execute() {
-
         $resultPage = $this->resultPageFactory->create();
         return $resultPage;
     }
