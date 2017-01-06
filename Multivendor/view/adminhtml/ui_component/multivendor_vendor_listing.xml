@@ -23,9 +23,9 @@
     </argument>
     <dataSource name="multivendor_vendor_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Magento\Customer\Ui\Component\DataProvider</argument>
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
             <argument name="name" xsi:type="string">multivendor_vendor_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="primaryFieldName" xsi:type="string">vendor_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -35,6 +35,53 @@
             </argument>
         </argument>
     </dataSource>
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+                <item name="stickyTmpl" xsi:type="string">ui/grid/sticky/toolbar</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="customer/index/massDelete"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure to delete selected Vendor?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="change_status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">change_status</item>
+                        <item name="label" xsi:type="string" translate="true">Change Status</item>
+                        <item name="url" xsi:type="url" path="customer/index/changeStatus"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Change Status</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure to change status for selected feed(s)?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
     <columns name="multivendor_vendor_columns">
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
@@ -60,9 +107,19 @@
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">Vendor code</item>
-                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
                 </item>
             </argument>
         </column>
     </columns>
+    <!--<container name="sticky">-->
+        <!--<argument name="data" xsi:type="array">-->
+            <!--<item name="config" xsi:type="array">-->
+                <!--<item name="component" xsi:type="string">Magento_Ui/js/grid/sticky/sticky</item>-->
+                <!--<item name="toolbarProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.listing_top</item>-->
+                <!--<item name="listingProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.multivendor_vendor_columns</item>-->
+            <!--</item>-->
+        <!--</argument>-->
+    <!--</container>-->
+
 </listing>
