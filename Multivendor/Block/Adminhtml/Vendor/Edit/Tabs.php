@@ -1,14 +1,11 @@
 <?php
 namespace Magestore\Multivendor\Block\Adminhtml\Vendor\Edit;
-
 /**
  * Class Tabs
  * @package Magestore\Multivendor\Block\Adminhtml\Vendor\Edit
  */
 class Tabs extends \Magento\Backend\Block\Widget\Tabs
 {
-
-
     /**
      *
      */
@@ -19,8 +16,6 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
         $this->setDestElementId('edit_form');
         $this->setTitle(__('Vendor Information'));
     }
-
-
     /**
      * @return $this
      * @throws \Exception
@@ -38,7 +33,6 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
                 'active' => true
             ]
         );
-
         $this->addTab(
             'product_section',
             [
@@ -48,8 +42,6 @@ class Tabs extends \Magento\Backend\Block\Widget\Tabs
                 'url' => $this->getUrl('*/*/product', array('_current' => true, 'id' => $this->getRequest()->getParam('id')))
             ]
         );
-
         return parent::_beforeToHtml();
     }
-
 }

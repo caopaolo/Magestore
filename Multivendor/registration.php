@@ -1,6 +1,6 @@
 <?php
-
-use \Magento\Framework\Component\ComponentRegistrar;
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Magestore_Multivendor', __DIR__);
-
-
+\Magento\Framework\Component\ComponentRegistrar::register(
+    \Magento\Framework\Component\ComponentRegistrar::MODULE,
+    'Magestore_Multivendor',
+    __DIR__
+);

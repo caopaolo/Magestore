@@ -1,6 +1,5 @@
 <?php
 namespace Magestore\Multivendor\Block\Adminhtml\Vendor\Edit;
-
 /**
  * Class Form
  * @package Magestore\Multivendor\Block\Adminhtml\Vendor\Edit

@@ -1,13 +1,6 @@
 <?php
 namespace Magestore\Multivendor\Block\Adminhtml\Vendor;
 
-
-/**
- * Created by PhpStorm.
- * User: anhnc
- * Date: 08/01/2017
- * Time: 09:29
- */
 class Edit extends \Magento\Backend\Block\Widget\Form\Container
 {
     protected function _construct()
@@ -30,6 +23,4 @@ class Edit extends \Magento\Backend\Block\Widget\Form\Container
             -100
         );
     }
-
-
 }

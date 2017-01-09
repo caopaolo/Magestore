@@ -9,10 +9,10 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 class InstallSchema implements InstallSchemaInterface
 {
     public function install(SchemaSetupInterface $setup, ModuleContextInterface $context) {
-	
-    $setup->startSetup();
-    /** multivendor table **/
-    if($setup->getConnection()->isTableExists('multivendor_vendor')!=true){
+
+        $setup->startSetup();
+        /** multivendor table **/
+        if($setup->getConnection()->isTableExists('multivendor_vendor')!=true){
             $table=$setup->getConnection()->newTable('multivendor_vendor')
                 ->addColumn(
                     'vendor_id',
@@ -104,8 +104,8 @@ class InstallSchema implements InstallSchemaInterface
 //                ->setOption('charset','utf8');
             $setup->getConnection()->createTable($table);
         }
-    /** multivendor_vendor_product**/
-    if($setup->getConnection()->isTableExists('multivendor_vendor_product')!=true){
+        /** multivendor_vendor_product**/
+        if($setup->getConnection()->isTableExists('multivendor_vendor_product')!=true){
             $table=$setup->getConnection()->newTable('multivendor_vendor_product')
                 ->addColumn(
                     'multivendor_vendor_product',
@@ -143,7 +143,7 @@ class InstallSchema implements InstallSchemaInterface
 //                ->setOption('charset','utf8');
             $setup->getConnection()->createTable($table);
         }
-    $setup->endSetup();
+        $setup->endSetup();
     }
 
 }

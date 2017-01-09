@@ -7,12 +7,10 @@ namespace Magestore\Multivendor\Block\Adminhtml\Vendor\Edit\Tab;
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
     implements \Magento\Backend\Block\Widget\Tab\TabInterface
 {
-
     /**
      * @var \Magento\Framework\ObjectManagerInterface
      */
     protected $_objectManager;
-
     /**
      * @param \Magento\Backend\Block\Template\Context $context
      * @param \Magento\Framework\Registry $registry
@@ -31,32 +29,25 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $this->_objectManager = $objectManager;
         parent::__construct($context, $registry, $formFactory, $data);
     }
-
     /**
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function _prepareLayout() {
         $this->getLayout()->getBlock('page.title')->setPageTitle($this->getPageTitle());
     }
-
-
     /**
      * @return $this
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     protected function _prepareForm()
     {
-
         $model = $this->_coreRegistry->registry('current_vendor');
-
         $form = $this->_formFactory->create();
         $form->setHtmlIdPrefix('page_');
         $fieldset = $form->addFieldset('base_fieldset', array('legend' => __('Vendor Information')));
-
         if ($model->getVendorId()) {
             $fieldset->addField('vendor_id', 'hidden', array('name' => 'vendor_id'));
         }
-
         $fieldset->addField('vendor_code', 'text', array(
             'label'     => __('Vendor Code'),
             'class'     => 'required-entry',
@@ -64,7 +55,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name'      => 'vendor_code',
             'disabled' => false,
         ));
-
         $fieldset->addField('name', 'text', array(
             'label'     => __('Name'),
             'class'     => 'required-entry',
@@ -72,7 +62,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name'      => 'name',
             'disabled' => false,
         ));
-
         $fieldset->addField('description', 'textarea', array(
             'label'     => __('Description'),
             'class'     => 'required-entry',
@@ -80,13 +69,11 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name'      => 'description',
             'disabled' => false,
         ));
-
-        $fieldset->addField('logo', 'image', array(
+        $fieldset->addField('logo:image', 'image', array(
             'label'     => __('Logo'),
-            'name'      => 'logo',
+            'name'      => 'logo:image',
             'disabled' => false,
         ));
-
         $fieldset->addField('address', 'text', array(
             'label'     => __('Address'),
             'class'     => 'required-entry',
@@ -94,7 +81,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name'      => 'address',
             'disabled' => false,
         ));
-
         $fieldset->addField('phone', 'text', array(
             'label'     => __('Phone'),
             'class'     => 'required-entry',
@@ -102,7 +88,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name'      => 'phone',
             'disabled' => false,
         ));
-
         $fieldset->addField('status', 'select', array(
             'label'     => __('Status'),
             'class'     => 'required-entry',
@@ -114,19 +99,16 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             ),
             'disabled' => false,
         ));
-
         $form->setValues($model->getData());
         $this->setForm($form);
         return parent::_prepareForm();
     }
-
     /**
      * @return mixed
      */
     public function getVendor() {
         return $this->_coreRegistry->registry('current_vendor');
     }
-
     /**
      * @return \Magento\Framework\Phrase
      */
@@ -134,7 +116,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         return $this->getVendor()->getId() ? __("Edit Vendor %1",
             $this->escapeHtml($this->getVendor()->getDisplayName())) : __('New Vendor');
     }
-
     /**
      * @return \Magento\Framework\Phrase
      */
@@ -142,8 +123,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     {
         return __('Vendor Information');
     }
-
-
     /**
      * @return \Magento\Framework\Phrase
      */
@@ -151,7 +130,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     {
         return __('Vendor Information');
     }
-
     /**
      * @return bool
      */
@@ -159,7 +137,6 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     {
         return true;
     }
-
     /**
      * @return bool
      */
@@ -167,6 +144,4 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
     {
         return false;
     }
-
-
 }

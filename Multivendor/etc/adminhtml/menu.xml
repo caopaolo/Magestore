@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd"> 
     <menu>
-        <add id="Magestore_Multivendor::VendorMenu" title="Multivendor" module="Magestore_Multivendor" sortOrder="30" resource="Magestore_Multivendor::Adminhtml"/>
-        <add id="Magestore_Multivendor::vendor" title="Vendor" module="Magestore_Multivendor" sortOrder="10" parent="Magestore_Multivendor::VendorMenu" action="multivendoradmin/vendor/index/" resource="Magento_Multivendor::vendor"/>
+        <add id="Magestore_Multivendor::vendor" title="Multivendor"
+             module="Magestore_Multivendor" sortOrder="10" resource="Magestore_Multivendor::vendor"/>
+        <add id="Magestore_Multivendor::vendor_manage" title="Manage Vendor"
+             module="Magestore_Multivendor" sortOrder="1" resource="Magestore_Multivendor::manage"
+            parent="Magestore_Multivendor::vendor" action="multivendoradmin/vendor/index"/>
     </menu>
 </config>

@@ -1,19 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anhnc
- * Date: 08/01/2017
- * Time: 09:30
- */
-
 namespace Magestore\Multivendor\Controller\Adminhtml\Vendor;
+
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Backend\App\Action;
+//use Magento\Backend\App\Action;
+
 class Edit extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
 {
+    /**
+     * @var \Magento\Framework\View\Result\PageFactory
+     */
+   
+
     public function execute()
     {
-        // TODO: Implement execute() method.
         $id = $this->getRequest()->getParam('id');
         $resultRedirect = $this->resultRedirectFactory->create();
         $model = $this->_objectManager->create('Magestore\Multivendor\Model\Vendor');
@@ -34,7 +33,7 @@ class Edit extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
         if (!$model->getId()) {
             $pageTitle = __('New Vendor');
         } else {
-            $pageTitle =  __('Edit Vendor %1', $model->getName());
+            $pageTitle = __('Edit Vendor %1', $model->getName());
         }
         $resultPage->getConfig()->getTitle()->prepend($pageTitle);
         return $resultPage;

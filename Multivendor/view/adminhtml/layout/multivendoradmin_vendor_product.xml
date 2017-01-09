@@ -4,12 +4,12 @@
     <container name="root">
         <block class="Magestore\Multivendor\Block\Adminhtml\Vendor\Edit\Tab\Product" name="vendor.edit.tab.product"/>
         <block class="Magento\Backend\Block\Widget\Grid\Serializer" name="product_grid_serializer">
-        <arguments>
-            <argument name="grid_block" xsi:type="string">vendor.edit.tab.product</argument>
-            <argument name="callback" xsi:type="string">getSelectedProducts</argument>
-            <argument name="input_element_name" xsi:type="string">vendor_product</argument>
-             <argument name="reload_param_name" xsi:type="string">oproduct</argument>
-        </arguments>
+            <arguments>
+                <argument name="grid_block" xsi:type="string">vendor.edit.tab.product</argument>
+                <argument name="callback" xsi:type="string">getSelectedProducts</argument>
+                <argument name="input_element_name" xsi:type="string">vendor_product</argument>
+                <argument name="reload_param_name" xsi:type="string">oproduct</argument>
+            </arguments>
         </block>
     </container>
 </page>
