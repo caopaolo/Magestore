@@ -14,7 +14,7 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
-
+        \Zend_Debug::dump($data);die;
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
 
