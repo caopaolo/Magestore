@@ -69,9 +69,9 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
             'name'      => 'description',
             'disabled' => false,
         ));
-        $fieldset->addField('logo:image', 'image', array(
+        $fieldset->addField('logo', 'image', array(
             'label'     => __('Logo'),
-            'name'      => 'logo:image',
+            'name'      => 'logo',
             'disabled' => false,
         ));
         $fieldset->addField('address', 'text', array(

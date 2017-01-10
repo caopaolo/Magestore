@@ -46,7 +46,7 @@ class InstallSchema implements InstallSchemaInterface
                     'name'
                 )
                 ->addColumn(
-                    'logo:image',
+                    'logo',
                     Table::TYPE_TEXT,
                     255,
                     [

@@ -7,7 +7,7 @@
  */
 
 namespace Magestore\Multivendor\Controller\Adminhtml\Vendor;
-
+use Magento\Framework\App\Filesystem\DirectoryList;
 
 class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
 {
@@ -24,11 +24,39 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
             /** @var \Magento\Cms\Model\Page $model */
             $model = $this->_objectManager->create('MageStore\Multivendor\Model\Vendor');
 
-            $id = $this->getRequest()->getParam('page_id');
+            $uploader = $this->_objectManager->create(
+                'Magento\MediaStorage\Model\File\Uploader',
+                ['fileId' => 'logo']
+            );
+            $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
+            $imageAdapter = $this->_objectManager->get('Magento\Framework\Image\AdapterFactory')->create();
+            $uploader->addValidateCallback('vendor_image', $imageAdapter, 'validateUploadFile');
+            $uploader->setAllowRenameFiles(true);
+            $uploader->setFilesDispersion(true);
+            /** @var \Magento\Framework\Filesystem\Directory\Read $mediaDirectory */
+            $mediaDirectory = $this->_objectManager->get('Magento\Framework\Filesystem')
+                ->getDirectoryRead(DirectoryList::MEDIA);
+
+            $config = $this->_objectManager->get('MageStore\Multivendor\Model\Vendor');
+            $result = $uploader->save($mediaDirectory->getAbsolutePath($config->getBaseTmpMediaPath()));
+
+            $this->_eventManager->dispatch(
+                'saveAndContinueEdit',
+                ['result' => $result, 'action' => $this]
+            );
+
+            unset($result['tmp_name']);
+            unset($result['path']);
+
+            $result['url'] = $this->_objectManager->get('MageStore\Multivendor\Model\Vendor')
+                ->getTmpMediaUrl($result['file']);
+            $data['logo'] = $result['file'];
+            \Zend_Debug::dump($data);die;
+            $id = $this->getRequest()->getParam('vendor_id');
             if ($id) {
                 $model->load($id);
             }
-            \Zend_Debug::dump($data);die;
+
             $model->setData($data);
 
             $this->_eventManager->dispatch(
@@ -57,7 +85,7 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
             }
 
             //$this->dataPersistor->set('vendor', $data);
-            return $resultRedirect->setPath('*/*/edit', ['page_id' => $this->getRequest()->getParam('page_id')]);
+            return $resultRedirect->setPath('*/*/edit', ['vendor_id' => $this->getRequest()->getParam('vendor_id')]);
         }
         return $resultRedirect->setPath('*/*/');
     }
