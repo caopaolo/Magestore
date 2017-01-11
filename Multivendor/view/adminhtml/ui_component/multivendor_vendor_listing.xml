@@ -239,13 +239,13 @@
         </actionsColumn>
 
     </columns>
-    <container name="sticky">
-        <argument name="data" xsi:type="array">
-            <item name="config" xsi:type="array">
-                <item name="component" xsi:type="string">Magento_Ui/js/grid/sticky/sticky</item>
-                <item name="toolbarProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.listing_top</item>
-                <item name="listingProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.multivendor_vendor_columns</item>
-            </item>
-        </argument>
-    </container>
+    <!--<container name="sticky">-->
+        <!--<argument name="data" xsi:type="array">-->
+            <!--<item name="config" xsi:type="array">-->
+                <!--<item name="component" xsi:type="string">Magento_Ui/js/grid/sticky/sticky</item>-->
+                <!--<item name="toolbarProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.listing_top</item>-->
+                <!--<item name="listingProvider" xsi:type="string">multivendor_vendor_listing.multivendor_vendor_listing.multivendor_vendor_columns</item>-->
+            <!--</item>-->
+        <!--</argument>-->
+    <!--</container>-->
 </listing>

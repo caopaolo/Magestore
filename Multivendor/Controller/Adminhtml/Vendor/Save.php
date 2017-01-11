@@ -47,17 +47,19 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
             try{
                 $this->_imageHelper->mediaUploadImage($vendor_model,'logo',self::BASE_MEDIA_PATH, true);
                 $vendor_model->save();
+                \Zend_Debug::dump($data);die;
                 if(isset($data['vendor_product'])){
                     $productIds = preg_replace("/(&)/", ',', $data['vendor_product']);
                     $vendorId = $vendor_model->getId();
 
                     $vendorProductModel = $this->_objectManager->create('Magestore\Multivendor\Model\VendorProduct')->load($vendorId, 'vendor_id');
-               
+
                     if (!$vendorProductModel->getId()) {
                         $vendorProductModel = $this->_objectManager->create('Magestore\Multivendor\Model\VendorProduct');
                     }
                     $vendorProductModel->setData('vendor_id', $vendorId);
                     $vendorProductModel->setData('product_ids', $productIds);
+                    die('fe');
                     $vendorProductModel->save();
                 }
                 $this->messageManager->addSuccess(__('Vendor was successfully saved'));
