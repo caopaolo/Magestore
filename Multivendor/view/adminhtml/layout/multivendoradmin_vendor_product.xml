@@ -7,8 +7,8 @@
             <arguments>
                 <argument name="grid_block" xsi:type="string">vendor.edit.tab.product</argument>
                 <argument name="callback" xsi:type="string">getSelectedProducts</argument>
-                <argument name="input_element_name" xsi:type="string">vendor_product</argument>
-                <argument name="reload_param_name" xsi:type="string">oproduct</argument>
+                <argument name="input_element_name" xsi:type="string">in_products</argument>
+                <argument name="reload_param_name" xsi:type="string">products_vendor</argument>
             </arguments>
         </block>
     </container>

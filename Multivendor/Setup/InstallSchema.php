@@ -131,8 +131,8 @@ class InstallSchema implements InstallSchemaInterface
                 )
                 ->addColumn(
                     'product_ids',
-                    Table::TYPE_INTEGER,
-                    null,
+                    Table::TYPE_TEXT,
+                    255,
                     [
                         'nullable'=>false
                     ],

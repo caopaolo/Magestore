@@ -11,82 +11,66 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 
 class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
 {
+    protected $_imageHelper;
+
+    const BASE_MEDIA_PATH = 'magestore/multivendor/images';
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
+        \Magestore\Multivendor\Helper\Image $imageHelper)
+    {
+        $this->_imageHelper = $imageHelper;
+        parent::__construct($context);
+    }
+
     public function execute()
     {
+        $resultRedirect = $this->resultRedirectFactory->create();
+        $vendorId = (int)$this->getRequest()->getParam('vendor_id');
         $data = $this->getRequest()->getPostValue();
-        \Zend_Debug::dump($data);die;
+
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
-
+        /** time **/
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $objDate = $objectManager->create('Magento\Framework\Stdlib\DateTime\DateTime');
+        $date = $objDate->gmtDate();
         if ($data) {
-
-
-            /** @var \Magento\Cms\Model\Page $model */
-            $model = $this->_objectManager->create('MageStore\Multivendor\Model\Vendor');
-
-            $uploader = $this->_objectManager->create(
-                'Magento\MediaStorage\Model\File\Uploader',
-                ['fileId' => 'logo']
-            );
-            $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png']);
-            $imageAdapter = $this->_objectManager->get('Magento\Framework\Image\AdapterFactory')->create();
-            $uploader->addValidateCallback('vendor_image', $imageAdapter, 'validateUploadFile');
-            $uploader->setAllowRenameFiles(true);
-            $uploader->setFilesDispersion(true);
-            /** @var \Magento\Framework\Filesystem\Directory\Read $mediaDirectory */
-            $mediaDirectory = $this->_objectManager->get('Magento\Framework\Filesystem')
-                ->getDirectoryRead(DirectoryList::MEDIA);
-
-            $config = $this->_objectManager->get('MageStore\Multivendor\Model\Vendor');
-            $result = $uploader->save($mediaDirectory->getAbsolutePath($config->getBaseTmpMediaPath()));
-
-            $this->_eventManager->dispatch(
-                'saveAndContinueEdit',
-                ['result' => $result, 'action' => $this]
-            );
-
-            unset($result['tmp_name']);
-            unset($result['path']);
-
-            $result['url'] = $this->_objectManager->get('MageStore\Multivendor\Model\Vendor')
-                ->getTmpMediaUrl($result['file']);
-            $data['logo'] = $result['file'];
-            \Zend_Debug::dump($data);die;
-            $id = $this->getRequest()->getParam('vendor_id');
-            if ($id) {
-                $model->load($id);
+            if($vendorId){
+                $vendor_model = $this->_objectManager->create('Magestore\Multivendor\Model\Vendor')->load($vendorId);;
             }
+            else{
+                $vendor_model = $this->_objectManager->create('Magestore\Multivendor\Model\Vendor');
+            }
+            $vendor_model->setData($data);
+            $vendor_model->setData('created_at',$date) ;
+            $vendor_model->setData('updated_at',$date) ;
+            try{
+                $this->_imageHelper->mediaUploadImage($vendor_model,'logo',self::BASE_MEDIA_PATH, true);
+                $vendor_model->save();
+                if(isset($data['vendor_product'])){
+                    $productIds = preg_replace("/(&)/", ',', $data['vendor_product']);
+                    $vendorId = $vendor_model->getId();
 
-            $model->setData($data);
-
-            $this->_eventManager->dispatch(
-                'save',
-                ['vendor' => $model, 'request' => $this->getRequest()]
-            );
-
-//            if (!$this->dataProcessor->validate($data)) {
-//                return $resultRedirect->setPath('*/*/edit', ['vendor_id' => $model->getId(), '_current' => true]);
-//            }
-
-            try {
-
-                $model->save();
-                $this->messageManager->addSuccess(__('You saved the vendor.'));
-                $this->dataPersistor->clear('vendor');
-                if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['vendor_id' => $model->getId(), '_current' => true]);
+                    $vendorProductModel = $this->_objectManager->create('Magestore\Multivendor\Model\VendorProduct')->load($vendorId, 'vendor_id');
+               
+                    if (!$vendorProductModel->getId()) {
+                        $vendorProductModel = $this->_objectManager->create('Magestore\Multivendor\Model\VendorProduct');
+                    }
+                    $vendorProductModel->setData('vendor_id', $vendorId);
+                    $vendorProductModel->setData('product_ids', $productIds);
+                    $vendorProductModel->save();
                 }
-                return $resultRedirect->setPath('*/*/');
-
-            } catch (LocalizedException $e) {
+                $this->messageManager->addSuccess(__('Vendor was successfully saved'));
+            }catch (\Exception $e){
                 $this->messageManager->addError($e->getMessage());
-            } catch (\Exception $e) {
-                $this->messageManager->addException($e, __('Something went wrong while saving the vendor.'));
+                return  $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
+            }
+            if ($this->getRequest()->getParam('back') == 'edit') {
+                return  $resultRedirect->setPath('*/*/edit', ['id' =>$vendor_model->getId()]);
             }
 
-            //$this->dataPersistor->set('vendor', $data);
-            return $resultRedirect->setPath('*/*/edit', ['vendor_id' => $this->getRequest()->getParam('vendor_id')]);
-        }
+            
         return $resultRedirect->setPath('*/*/');
     }
+}
 }

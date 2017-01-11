@@ -1,4 +1,5 @@
 <?php
+
 namespace Magestore\Multivendor\Block\Adminhtml\Vendor\Edit\Tab;
 
 use Magento\Backend\Block\Widget\Grid;
@@ -12,6 +13,7 @@ use Magento\Backend\Block\Widget\Grid\Column;
  */
 class Product extends \Magento\Backend\Block\Widget\Grid\Extended implements \Magento\Backend\Block\Widget\Tab\TabInterface
 {
+
     /**
      * @var
      */
@@ -396,6 +398,8 @@ class Product extends \Magento\Backend\Block\Widget\Grid\Extended implements \Ma
     {
         return __('View Product');
     }
+
+
     /**
      * @return bool
      */
@@ -403,6 +407,8 @@ class Product extends \Magento\Backend\Block\Widget\Grid\Extended implements \Ma
     {
         return true;
     }
+
+
     /**
      * @return bool
      */
@@ -410,4 +416,14 @@ class Product extends \Magento\Backend\Block\Widget\Grid\Extended implements \Ma
     {
         return false;
     }
+
+    /**
+     * @return string
+     */
+    public function getGridUrl()
+    {
+        return $this->getUrl('*/*/productgrid', ['id' => $this->getRequest()->getParam('id')]);
+    }
+
+
 }

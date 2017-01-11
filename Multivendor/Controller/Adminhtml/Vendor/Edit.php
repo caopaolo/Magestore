@@ -9,8 +9,24 @@ class Edit extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
     /**
      * @var \Magento\Framework\View\Result\PageFactory
      */
-   
 
+    /**
+     * @var \Magento\Framework\View\Result\PageFactory
+     */
+    protected $_resultPageFactory;
+
+    /**
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     */
+    public function __construct(
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+
+    ) {
+        $this->_resultPageFactory = $resultPageFactory;
+        parent::__construct($context);
+    }
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');
@@ -29,7 +45,7 @@ class Edit extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
             $model->setData($data);
         }
         $registryObject->register('current_vendor', $model);
-        $resultPage = $this->resultPageFactory->create();
+        $resultPage = $this->_resultPageFactory->create();
         if (!$model->getId()) {
             $pageTitle = __('New Vendor');
         } else {
