@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <page layout='1column' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
     <head>
-        <title>Vendor</title>
-        <css src="Magestore_Multivendor::css/vendor.css"/>
+        <title>Vendor_info</title>
     </head>
     <body>
         <referenceContainer name="content">
-            <block name="vendor" class="Magestore\Multivendor\Block\Vendor" template="Magestore_Multivendor::vendor.phtml" />
+            <block name="vendor_view" class="Magestore\Multivendor\Block\Vendor\View" template="Magestore_Multivendor::vendor.phtml" />
         </referenceContainer>
     </body>
 </page>

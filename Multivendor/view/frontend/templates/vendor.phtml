@@ -1,1 +1,14 @@
-<h1><?php $this->getVendorCollection() ?></h1>
+
+<div class="container">
+    <div class="col-md-9" style="float:none; margin: 0 auto">
+        <?php foreach ($this->getVendorCollection() as $vendor){?>
+            <div class="col-md-3" style="padding: 5px;">
+                <a href="/multivendor/vendor/view/id/<?php echo $vendor['vendor_id'] ?>">
+                    <img src="<?php echo $this->getMediaUrl().$vendor['logo']?>">    
+                </a>
+                
+            </div>
+        <?php }?>
+    </div>
+</div>
+

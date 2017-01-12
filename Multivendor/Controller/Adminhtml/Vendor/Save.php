@@ -36,7 +36,7 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
         $date = $objDate->gmtDate();
         if ($data) {
             if($vendorId){
-                $vendor_model = $this->_objectManager->create('Magestore\Multivendor\Model\Vendor')->load($vendorId);;
+                $vendor_model = $this->_objectManager->create('Magestore\Multivendor\Model\Vendor')->load($vendorId);
             }
             else{
                 $vendor_model = $this->_objectManager->create('Magestore\Multivendor\Model\Vendor');
@@ -47,9 +47,9 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
             try{
                 $this->_imageHelper->mediaUploadImage($vendor_model,'logo',self::BASE_MEDIA_PATH, true);
                 $vendor_model->save();
-                \Zend_Debug::dump($data);die;
-                if(isset($data['vendor_product'])){
-                    $productIds = preg_replace("/(&)/", ',', $data['vendor_product']);
+
+                if(isset($data['in_products'])){
+                    $productIds = preg_replace("/(&)/", ',', $data['in_products']);
                     $vendorId = $vendor_model->getId();
 
                     $vendorProductModel = $this->_objectManager->create('Magestore\Multivendor\Model\VendorProduct')->load($vendorId, 'vendor_id');
@@ -59,7 +59,7 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
                     }
                     $vendorProductModel->setData('vendor_id', $vendorId);
                     $vendorProductModel->setData('product_ids', $productIds);
-                    die('fe');
+          
                     $vendorProductModel->save();
                 }
                 $this->messageManager->addSuccess(__('Vendor was successfully saved'));
