@@ -13,5 +13,11 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Catalog\Model\Layer">
+        <plugin name="vendor_list" type="Magestore\Multivendor\Plugin\Catalog\Layer"/>
+    </type>
+    <type name="Magento\Framework\Data\Collection\AbstractDb">
+        <plugin name="vendor_product_list" type="Magestore\Multivendor\Plugin\Catalog\Product\Collection\AbstractDb"/>
+    </type>
 </config>
 

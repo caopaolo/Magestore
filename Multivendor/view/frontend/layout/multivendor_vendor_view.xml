@@ -4,8 +4,8 @@
         <title>Vendor_info</title>
     </head>
     <body>
-        <referenceContainer name="content">
-            <block name="vendor_view" class="Magestore\Multivendor\Block\Vendor\View" template="Magestore_Multivendor::vendor.phtml" />
-        </referenceContainer>
+        <!--<referenceContainer name="content">-->
+            <!--<block name="vendor_view" class="Magestore\Multivendor\Block\Vendor\View" template="Magestore_Multivendor::vendor.phtml" />-->
+        <!--</referenceContainer>-->
     </body>
 </page>
