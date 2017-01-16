@@ -1,6 +1,15 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: anhnc
+ * Date: 16/01/2017
+ * Time: 11:30
+ */
+
 namespace Magestore\Multivendor\Controller\Vendor;
-class View extends \Magento\Framework\App\Action\Action
+
+
+class Detail extends \Magento\Framework\App\Action\Action
 {
     protected $resultPageFactory;
     protected $_coreRegistry = null;
@@ -17,18 +26,7 @@ class View extends \Magento\Framework\App\Action\Action
         $this->_storeManager = $storeManager;
     }
     public function execute() {
-   
-        if(!$this->_coreRegistry->registry('current_category')){
-            $category = $this->_objectManager->create('Magento\Catalog\Model\Category')->load($this->_storeManager->getStore()->getRootCategoryId());
-            $this->_coreRegistry->register('current_category',$category);
-        }
         $resultPage = $this->resultPageFactory->create();
-        $id = $this->getRequest()->getParam('id');
-  
-        $vendorModel = $this->_objectManager->create('Magestore\Multivendor\Model\Vendor')
-            ->load($id);
-        $resultPage->addHandle('catalog_category_view');
-        $resultPage->getConfig()->getTitle()->set($vendorModel->getName());
         return $resultPage;
     }
 }

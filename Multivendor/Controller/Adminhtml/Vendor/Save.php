@@ -70,7 +70,6 @@ class Save extends \Magestore\Multivendor\Controller\Adminhtml\Vendor
             if ($this->getRequest()->getParam('back') == 'edit') {
                 return  $resultRedirect->setPath('*/*/edit', ['id' =>$vendor_model->getId()]);
             }
-
             
         return $resultRedirect->setPath('*/*/');
     }

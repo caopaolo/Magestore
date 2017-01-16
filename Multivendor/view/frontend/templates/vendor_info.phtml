@@ -1,0 +1,14 @@
+<div class="vendor_list">
+    <?php
+    $data = $this->getVendorInfo();
+
+    foreach ( $data as $vendor){?>
+    <div class="vendor_detail" style="float: left; display: inline;">
+        <a href="/multivendor/vendor/detail/id/<?php echo $vendor['vendor_id'] ?>">
+            <img  class="vendor_logo" src="<?php echo $this->getMediaUrl().$vendor['logo']?>" style="width: 30px; height: 30px;">
+            <p class="vendor_name"><?php echo $vendor['name'] ?></p>
+        </a>
+    </div>
+
+    <?php } ?>
+</div>

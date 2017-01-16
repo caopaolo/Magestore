@@ -14,11 +14,14 @@ class Layer
     protected $_request;
     protected $_storeManager;
     protected $_objectManager;
+    protected $_configHelper;
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Store\Model\StoreManager $storeManager,
+        \Magestore\Multivendor\Helper\Config $configHelper,
         \Magento\Framework\ObjectManagerInterface $objectManager
     ) {
+        $this->_configHelper = $configHelper;
         $this->_request = $request;
         $this->_storeManager = $storeManager;
         $this->_objectManager = $objectManager;
@@ -32,7 +35,12 @@ class Layer
 
             $productIdArray = explode(',', $productIds);
             if($id){
-                $listProduct->getSelect()->where('e.entity_id in (?)',$productIdArray);
+                if($this->_configHelper->getStoreConfig('multivendor/general/active') == 0){
+                    $listProduct->getSelect();
+                }else{
+                    $listProduct->getSelect()->where('e.entity_id in (?)',$productIdArray);
+                }
+               
             }
             else{
                 $listProduct->getSelect();

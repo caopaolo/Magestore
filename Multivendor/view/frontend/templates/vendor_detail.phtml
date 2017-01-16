@@ -1,0 +1,10 @@
+
+<?php $vendor = $this->getVendorDetail(); ?>
+<div class="container">
+    <div class="col-md-3">
+        <img src="<?php echo $this->getMediaUrl(). $vendor['logo'] ?>">
+    </div>
+    <div class="col-md-6">
+        <p><?php echo $vendor['description'] ?></p>
+    </div>
+</div>

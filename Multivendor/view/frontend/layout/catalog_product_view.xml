@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page layout='1column' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" >
+    <head>
+        <title>Vendor_info</title>
+
+    </head>
+    <body>
+        <referenceContainer name="alert.urls">
+            <block class="Magestore\Multivendor\Block\VendorInfo" name="vendor.info" template="Magestore_Multivendor::vendor_info.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
